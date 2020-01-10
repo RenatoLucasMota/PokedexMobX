@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:news_mobx/pages/pokedex_page.dart';
-import 'package:news_mobx/store/pokemon_store.dart';
+import 'package:pokedex_mobx/pages/pokedex_page.dart';
+import 'package:pokedex_mobx/store/pokemon_store.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
@@ -15,12 +15,12 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiProvider(
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Pokedex',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
             primaryColor: Colors.white,
             accentColor: Colors.grey,
-            brightness: Brightness.light),
+            brightness: Brightness.dark,),
         home: PokeDexPage(),
       ),
       providers: [

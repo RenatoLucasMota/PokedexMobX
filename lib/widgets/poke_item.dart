@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:news_mobx/utils/consts.dart';
 
 class PokeItem extends StatelessWidget {
   final String nome;
   final Widget image;
   final List<String> tipos;
+  final Color cor;
 
   Widget setTipos() {
     List<Widget> lista = [];
@@ -43,13 +43,13 @@ class PokeItem extends StatelessWidget {
     );
   }
 
-  const PokeItem({Key key, this.nome, this.image, this.tipos})
+  const PokeItem({Key key, this.nome, this.image, this.tipos, this.cor})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: Consts.getColorType(type: tipos[0]),
+          color: cor,
           borderRadius: BorderRadius.circular(20)),
       margin: EdgeInsets.all(10),
       child: Padding(

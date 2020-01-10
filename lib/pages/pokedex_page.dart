@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:news_mobx/pages/pokedetail_page.dart';
-import 'package:news_mobx/store/pokemon_store.dart';
-import 'package:news_mobx/widgets/poke_item.dart';
+import 'package:pokedex_mobx/pages/pokedetail_page.dart';
+import 'package:pokedex_mobx/store/pokemon_store.dart';
+import 'package:pokedex_mobx/widgets/poke_item.dart';
 import 'package:provider/provider.dart';
 
 class PokeDexPage extends StatelessWidget {
@@ -28,8 +28,9 @@ class PokeDexPage extends StatelessWidget {
         ),
         title: Text(
           'Pokedex',
-          style: TextStyle(color: Colors.black,
-            fontSize: 24,
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 28,
             fontWeight: FontWeight.bold,
             fontFamily: 'Google',
           ),
@@ -52,6 +53,7 @@ class _BodyState extends State<Body> {
     final _pokemonStore = Provider.of<PokemonStore>(context);
     _pokemonStore.fetchList();
     return Observer(
+      name: 'pagehome',
       builder: (_) => (_pokemonStore.pokeApi != null)
           ? AnimationLimiter(
               child: GridView.builder(
@@ -70,6 +72,9 @@ class _BodyState extends State<Body> {
                       child: ScaleAnimation(
                         child: GestureDetector(
                           child: PokeItem(
+                            cor: _pokemonStore.getColorPokemon(
+                                type: _pokemonStore
+                                    .pokeApi.pokemon[index].type[0]),
                             tipos: _pokemonStore.pokeApi.pokemon[index].type,
                             nome: _pokemonStore.pokeApi.pokemon[index].name,
                             image: Hero(

@@ -1,4 +1,4 @@
-package com.example.news_mobx
+package com.example.pokedex_mobx
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

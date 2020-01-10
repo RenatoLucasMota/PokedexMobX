@@ -1,4 +1,4 @@
-name: news_mobx
+name: pokedex_mobx
 description: A new Flutter project.
 
 # The following defines the version and build number for your application.
@@ -30,6 +30,7 @@ dependencies:
   md2_tab_indicator: ^1.0.2
   provider: ^4.0.1
   flutter_staggered_animations: "^0.1.2"
+  carousel_slider: ^1.4.1
 
 dev_dependencies:
   flutter_test:

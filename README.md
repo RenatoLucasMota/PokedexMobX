@@ -1,4 +1,4 @@
-# news_mobx
+# pokedex_mobx
 
 A new Flutter project.
 
