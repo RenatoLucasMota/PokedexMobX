@@ -12,35 +12,18 @@ mixin _$PokemonStore on PokemonStoreBase, Store {
   final _$pokeApiAtom = Atom(name: 'PokemonStoreBase.pokeApi');
 
   @override
-  PokeAPI get pokeApi {
+  PokeApi get pokeApi {
     _$pokeApiAtom.context.enforceReadPolicy(_$pokeApiAtom);
     _$pokeApiAtom.reportObserved();
     return super.pokeApi;
   }
 
   @override
-  set pokeApi(PokeAPI value) {
+  set pokeApi(PokeApi value) {
     _$pokeApiAtom.context.conditionallyRunInAction(() {
       super.pokeApi = value;
       _$pokeApiAtom.reportChanged();
     }, _$pokeApiAtom, name: '${_$pokeApiAtom.name}_set');
-  }
-
-  final _$loadingListAtom = Atom(name: 'PokemonStoreBase.loadingList');
-
-  @override
-  bool get loadingList {
-    _$loadingListAtom.context.enforceReadPolicy(_$loadingListAtom);
-    _$loadingListAtom.reportObserved();
-    return super.loadingList;
-  }
-
-  @override
-  set loadingList(bool value) {
-    _$loadingListAtom.context.conditionallyRunInAction(() {
-      super.loadingList = value;
-      _$loadingListAtom.reportChanged();
-    }, _$loadingListAtom, name: '${_$loadingListAtom.name}_set');
   }
 
   final _$lengthAtom = Atom(name: 'PokemonStoreBase.length');
@@ -64,20 +47,20 @@ mixin _$PokemonStore on PokemonStoreBase, Store {
       ActionController(name: 'PokemonStoreBase');
 
   @override
-  dynamic fetchList() {
+  Widget getThumb({String numero}) {
     final _$actionInfo = _$PokemonStoreBaseActionController.startAction();
     try {
-      return super.fetchList();
+      return super.getThumb(numero: numero);
     } finally {
       _$PokemonStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  dynamic refreshList({String newURL}) {
+  dynamic fetchList() {
     final _$actionInfo = _$PokemonStoreBaseActionController.startAction();
     try {
-      return super.refreshList(newURL: newURL);
+      return super.fetchList();
     } finally {
       _$PokemonStoreBaseActionController.endAction(_$actionInfo);
     }

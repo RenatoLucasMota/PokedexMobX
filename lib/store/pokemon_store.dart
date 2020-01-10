@@ -1,9 +1,11 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:news_mobx/models/poke_api.dart';
 import 'package:news_mobx/utils/consts.dart';
+import 'package:http/http.dart' as http;
 
 part 'pokemon_store.g.dart';
 
@@ -11,57 +13,42 @@ class PokemonStore = PokemonStoreBase with _$PokemonStore;
 
 abstract class PokemonStoreBase with Store {
   @observable
-  PokeAPI pokeApi;
-
-  @observable
-  bool loadingList = false;
-
+  PokeApi pokeApi;
+  
   @observable
   int length;
+
+  @action
+  Widget getThumb({String numero}) {
+    return getImage(numero: numero);
+  }
 
   @action
   fetchList() {
     loadPokeApi().then((pokeApiList) {
       pokeApi = pokeApiList;
-      length = pokeApi.results.length;
+      length = pokeApi.pokemon.length;
     });
   }
 
-  @action
-  refreshList({String newURL}) {
-    newPokeApi(newURL: newURL).then((pokeApiList) {
-      loadingList = true;
-      PokeAPI newPokeApi = pokeApiList;
-      pokeApi.next = pokeApiList.next;
-      pokeApi.count = pokeApiList.count;
-      pokeApi.previous = pokeApiList.previous;
-      pokeApi.results.addAll(newPokeApi.results);
-      length = pokeApi.results.length;
-      loadingList = false;
-    });
-  }
-
-  Future<PokeAPI> loadPokeApi() async {
+  Future<PokeApi> loadPokeApi() async {
     try {
-      final response = await Dio().get(Consts.baseURL).timeout(Duration(seconds: 2), onTimeout: () {
-        newPokeApi();  
-      } );  
-      return PokeAPI.fromJson(response.data);
-    }
-    catch (error, stacktrace) {
+      final response = await http.get(Consts.baseURL);
+      var decodeJson = jsonDecode(response.body);
+      return PokeApi.fromJson(decodeJson);
+    } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
+      return null;
     }
   }
 
-  Future<PokeAPI> newPokeApi({String newURL}) async {
-    try {
-      final response = await Dio().get(newURL).timeout(Duration(seconds: 2), onTimeout: () {
-        newPokeApi(newURL: newURL);  
-      } );  
-      return PokeAPI.fromJson(response.data);
-    }
-    catch (error, stacktrace) {
-      print("Exception occured: $error stackTrace: $stacktrace");
-    }
+  Widget getImage({String numero}) {
+    return CachedNetworkImage(
+      placeholder: (context, url) => new Container(
+        color: Colors.transparent,
+      ),
+      imageUrl:
+          'https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/$numero.png',
+    );
   }
 }
