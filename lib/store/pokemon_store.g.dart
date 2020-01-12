@@ -94,6 +94,23 @@ mixin _$PokemonStore on PokemonStoreBase, Store {
     }, _$pokemonAtualAtom, name: '${_$pokemonAtualAtom.name}_set');
   }
 
+  final _$pokemonAnteriorAtom = Atom(name: 'PokemonStoreBase.pokemonAnterior');
+
+  @override
+  Pokemon get pokemonAnterior {
+    _$pokemonAnteriorAtom.context.enforceReadPolicy(_$pokemonAnteriorAtom);
+    _$pokemonAnteriorAtom.reportObserved();
+    return super.pokemonAnterior;
+  }
+
+  @override
+  set pokemonAnterior(Pokemon value) {
+    _$pokemonAnteriorAtom.context.conditionallyRunInAction(() {
+      super.pokemonAnterior = value;
+      _$pokemonAnteriorAtom.reportChanged();
+    }, _$pokemonAnteriorAtom, name: '${_$pokemonAnteriorAtom.name}_set');
+  }
+
   final _$PokemonStoreBaseActionController =
       ActionController(name: 'PokemonStoreBase');
 

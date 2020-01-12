@@ -35,10 +35,12 @@ class Pokemon {
   List<String> weaknesses;
   List<NextEvolution> nextEvolution;
   List<PrevEvolution> prevEvolution;
+  String order;
 
   Pokemon(
       {this.id,
       this.numero,
+      this.order,
       this.name,
       this.img,
       this.type,
@@ -54,6 +56,7 @@ class Pokemon {
   Pokemon.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     numero = json['num'];
+    order = json['order'];
     name = json['name'];
     img = json['img'];
     type = json['type'].cast<String>();
@@ -81,6 +84,7 @@ class Pokemon {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['num'] = this.numero;
+    data['order'] = this.order;
     data['name'] = this.name;
     data['img'] = this.img;
     data['type'] = this.type;

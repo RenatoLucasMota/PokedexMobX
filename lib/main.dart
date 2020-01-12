@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex_mobx/pages/pokedex_page.dart';
+import 'package:pokedex_mobx/pages/home_page.dart';
 import 'package:pokedex_mobx/store/pokemon_store.dart';
+import 'package:pokedex_mobx/store/pokemonv2_store.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
@@ -19,14 +20,17 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
             primaryColor: Colors.white,
-            accentColor: Colors.grey,
-            brightness: Brightness.dark,),
-        home: PokeDexPage(),
+            accentColor: Colors.red,
+            brightness: Brightness.light,),
+        home: HomePage(),/*PokeDexPage()*/
       ),
       providers: [
         Provider<PokemonStore>(
           create: (_) => PokemonStore(),
-        )
+        ),
+        Provider<PokemonV2Store>(
+          create: (_) => PokemonV2Store(),
+        ) 
       ],
     );
   }

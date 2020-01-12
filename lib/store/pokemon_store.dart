@@ -27,6 +27,9 @@ abstract class PokemonStoreBase with Store {
   @observable
   Pokemon pokemonAtual;
 
+  @observable
+  Pokemon pokemonAnterior;
+
   @action
   Widget getThumb({String numero}) {
     return getImage(numero: numero);
@@ -37,6 +40,10 @@ abstract class PokemonStoreBase with Store {
     loadPokeApi().then((pokeApiList) {
       pokeApi = pokeApiList;
       length = pokeApi.pokemon.length;
+      if (pokemonAnterior == null) {
+        pokemonAnterior = pokeApi.pokemon[0];
+      }
+      
     });
   }
 
@@ -47,6 +54,9 @@ abstract class PokemonStoreBase with Store {
 
   @action
   setPosicaoLista({int index}) {
+    if (( pokemonAtual != null ) && (pokemonAtual.name != pokemonAnterior.name)){
+    pokemonAnterior = pokemonAtual;
+    }
     if (index < 0) { 
       posicaoLista = 0;
     }
