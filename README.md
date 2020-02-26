@@ -10,4 +10,10 @@
 
 # Screenshots
 
-![](https://raw.githubusercontent.com/RenatoLucasMota/UDSPautas/master/screenshots/1.png?token=AFSVQRG532IRQLLYKCHWTYS6HA2FQ)
+![](https://raw.githubusercontent.com/RenatoLucasMota/PokeDex_MobX/master/Screenshot_1.png)
+
+![](https://raw.githubusercontent.com/RenatoLucasMota/PokeDex_MobX/master/Screenshot_3.png)
+
+![](https://raw.githubusercontent.com/RenatoLucasMota/PokeDex_MobX/master/Screenshot_4.png)
+
+![](https://raw.githubusercontent.com/RenatoLucasMota/PokeDex_MobX/master/Screenshot_5.png)
